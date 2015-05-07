@@ -31,9 +31,12 @@ void loop() {
   //set_maghrib_angle(15);
   //set_isha_angle(15);
   int dst=1;
-  float latitude=46.9500;
-  float longitude=7.4458;
+  
+  //MEKKA
+  float latitude=21.427378;
+  float longitude=39.814838;
   get_prayer_times(year(), month(), day(), latitude, longitude, dst, times);
+  
   for (int i=0;i<sizeof(times)/sizeof(double);i++){
     char tmp[10];
     int hours, minutes;
