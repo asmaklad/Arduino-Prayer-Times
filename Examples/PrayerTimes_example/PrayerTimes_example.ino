@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <Wire.h>
+#include <Time.h>
 #include "PrayerTimes.h"
 
 double times[sizeof(TimeName)/sizeof(char*)];
@@ -23,20 +24,28 @@ void setup() {
 void loop() {
 
   Serial.println("PTimes:");
-  //get_prayer_times(year(), month(), day(), latitude, longitude, timezone, &times);
-  set_calc_method(ISNA);
-  set_asr_method(Shafii);
-  //set_high_lats_adjust_method(AngleBased);
-  //set_fajr_angle(15);
-  //set_maghrib_angle(15);
-  //set_isha_angle(15);
+  
   int dst=1;
   
-  //MEKKA
-  float latitude=21.427378;
-  float longitude=39.814838;
-  get_prayer_times(year(), month(), day(), latitude, longitude, dst, times);
+  set_calc_method(ISNA);
+  set_asr_method(Shafii);
+  set_high_lats_adjust_method(AngleBased);
+  set_fajr_angle(15);
+  set_isha_angle(15);
   
+  //MEKKA
+  //float latitude=21.427378;
+  //float longitude=39.814838;
+  //get_prayer_times(year(), month(), day(), latitude, longitude, dst, times);
+    get_prayer_times(2015, 5, 8, 46.9500f, 7.4458f, 2, times);
+    
+    Serial.print("YEAR:");     
+    Serial.println(year());     
+    Serial.print("MONTH:");     
+    Serial.println(month());     
+    Serial.print("DAY:");     
+    Serial.println(day());     
+      
   for (int i=0;i<sizeof(times)/sizeof(double);i++){
     char tmp[10];
     int hours, minutes;
@@ -56,4 +65,29 @@ void loop() {
     */
   }
   delay(10000);
+}
+
+
+void getNextPTime(double &pTime, char* pTimeName)
+{
+  double times[sizeof(TimeName)/sizeof(char*)];
+  double currTime=hour()+minute()/60.0;
+  int i;
+  
+  set_calc_method(ISNA);
+  set_asr_method(Shafii);
+  set_high_lats_adjust_method(AngleBased);
+  set_fajr_angle(15);
+  set_isha_angle(15);
+
+  //get_prayer_times(year(), month(), day(), 46.9500, 7.4458, 1, times);
+  get_prayer_times(year(), month(), day(), 46.9500, 7.4458, 2, times);
+  for (i=0;i<sizeof(times)/sizeof(double);i++){
+    if (times[i] >= currTime) break;
+  }
+  if ( (times[i]-currTime) <0 ) {    
+    i=0;
+  }
+  pTime=times[i];
+  sprintf(pTimeName,"%s",TimeName[i]);
 }

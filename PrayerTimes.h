@@ -22,6 +22,7 @@
 		"Sunset",
 		"Maghrib",
 		"Isha",
+		"TimesCount"
 	};
 	// Calculation Methods
 	enum CalculationMethod
@@ -63,7 +64,6 @@
 		Sunset,
 		Maghrib,
 		Isha,
-
 		TimesCount
 	};
     
