@@ -1,6 +1,6 @@
 Islamic Prayer Times for Arduino
 ===========
-Been tested on Arduino :
+Tested on Arduino :
 - Mega 2560
 - Uno
 
