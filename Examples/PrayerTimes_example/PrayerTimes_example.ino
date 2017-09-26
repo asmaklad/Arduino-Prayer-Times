@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <Wire.h>
-#include <Time.h>
+#include <TimeLib.h>
 #include "PrayerTimes.h"
 
 double times[sizeof(TimeName)/sizeof(char*)];
