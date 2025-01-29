@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <Wire.h>
-// get this library from https://github.com/PaulStoffregen/Time
 #include <TimeLib.h>
 #include "PrayerTimes.h"
 
